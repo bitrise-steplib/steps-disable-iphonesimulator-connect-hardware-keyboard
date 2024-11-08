@@ -1,0 +1,53 @@
+format_version: "11"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+workflows:
+  test_disable_hardware_keyboard:
+    steps:
+    - script:
+        title: Create test simulator preferences file
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+
+            rm -rf "./_tmp"
+            mkdir -p "./_tmp"
+
+            cat <<EOF > ./_tmp/com.apple.iphonesimulator.plist
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+            <plist version="1.0">
+            <dict>
+                <key>DevicePreferences</key>
+                <dict>
+                    <key>D354CF33-5030-436B-B42E-0A260531432E</key>
+                    <dict>
+                    </dict>
+                </dict>
+            </dict>
+            </plist>
+            EOF
+
+            envman add --key TEST_IPHONESIMULATOR_PREFERENCES_PATH --value ./_tmp/com.apple.iphonesimulator.plist
+    - path::./:
+        title: Execute step
+        inputs:
+        - iphonesimulator_preferences_pth: $TEST_IPHONESIMULATOR_PREFERENCES_PATH
+        - verbose: "yes"
+    - script:
+        title: Verify hardware keyboard is disabled
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+
+            simulator_prefs_content=$(cat $TEST_IPHONESIMULATOR_PREFERENCES_PATH)
+            expected_content='<?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+            <plist version="1.0"><dict><key>ConnectHardwareKeyboard</key><string>0</string><key>DevicePreferences</key><dict><key>D354CF33-5030-436B-B42E-0A260531432E</key><dict><key>ConnectHardwareKeyboard</key><false/></dict></dict></dict></plist>'
+
+            if [ "$simulator_prefs_content" != "$expected_content" ]; then
+                echo "Simulator preferences content does not match the expected content"
+                exit 1
+            fi
