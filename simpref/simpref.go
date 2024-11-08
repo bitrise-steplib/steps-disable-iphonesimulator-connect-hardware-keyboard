@@ -12,11 +12,6 @@ import (
 	"github.com/bitrise-io/go-xcode/v2/destination"
 )
 
-const (
-	DefaultIPhoneSimulatorPreferencesPth = "~/Library/Preferences/com.apple.iphonesimulator.plist"
-	defaultSimulatorDestination          = "platform=iOS Simulator,name=Bitrise iOS default,OS=latest"
-)
-
 type IPhoneSimulatorPreferences struct {
 	pth         string
 	format      int
