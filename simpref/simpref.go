@@ -110,7 +110,7 @@ func (prefs *IPhoneSimulatorPreferences) DisableConnectHardwareKeyboard() error 
 			return err
 		}
 
-		for deviceID, _ := range devicesPreferences {
+		for deviceID := range devicesPreferences {
 			devicePreferences, err := getMap(devicesPreferences, deviceID)
 			if err != nil {
 				return err

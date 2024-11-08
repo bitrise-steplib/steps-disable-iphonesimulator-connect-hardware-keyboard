@@ -10,10 +10,10 @@ workflows:
         - content: |-
             #!/bin/bash
             set -ex
-            
+
             rm -rf "./_tmp"
             mkdir -p "./_tmp"
-            
+
             cat <<EOF > ./_tmp/com.apple.iphonesimulator.plist
             <?xml version="1.0" encoding="UTF-8"?>
             <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -28,7 +28,7 @@ workflows:
             </dict>
             </plist>
             EOF
-            
+
             envman add --key TEST_IPHONESIMULATOR_PREFERENCES_PATH --value ./_tmp/com.apple.iphonesimulator.plist
     - path::./:
         title: Execute step

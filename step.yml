@@ -13,14 +13,14 @@ project_type_tags:
 - flutter
 
 type_tags:
-  - utility
+- utility
 
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard
 
 inputs:
-- iphonesimulator_preferences_pth: "~/Library/Preferences/com.apple.iphonesimulator.plist"
+- iphonesimulator_preferences_pth: ~/Library/Preferences/com.apple.iphonesimulator.plist
   opts:
     title: iphonesimulator preferences path
     summary: The path of the iphonesimulator preferences file.
