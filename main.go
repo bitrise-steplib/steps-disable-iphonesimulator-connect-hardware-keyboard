@@ -39,7 +39,7 @@ func main() {
 	if err != nil { // not fatal error, continuing with empty version
 		logger.Warnf("failed to read Xcode version: %s", err)
 	}
-	deviceFinder := destination.NewDeviceFinder(logger, commandFactory, xcodeVersion)
+	deviceFinder := destination.NewDeviceFinder(newDeviceFinderLogger(logger), commandFactory, xcodeVersion)
 	pathModifier := pathutil.NewPathModifier()
 	fileManager := fileutil.NewFileManager()
 

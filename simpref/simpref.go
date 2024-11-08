@@ -35,7 +35,7 @@ func OpenIPhoneSimulatorPreferences(pth string, deviceFinder destination.DeviceF
 			return nil, fmt.Errorf("failed to open file: %w", err)
 		}
 
-		logger.Debugf("iphonesimulator preferences file not found at %s, creating one...", absPth)
+		logger.Printf("iphonesimulator preferences file not found at %s, creating one...", absPth)
 
 		prefsFile, err = os.Create(absPth)
 		if err != nil {
