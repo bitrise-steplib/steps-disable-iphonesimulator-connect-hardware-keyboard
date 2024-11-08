@@ -25,6 +25,7 @@ inputs:
     title: iphonesimulator preferences path
     summary: The path of the iphonesimulator preferences file.
     is_required: true
+    is_dont_change_value: true
 
 - verbose: "no"
   opts:
