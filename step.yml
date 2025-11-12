@@ -6,11 +6,13 @@ source_code_url: https://github.com/bitrise-steplib/steps-disable-iphonesimulato
 support_url: https://github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard/issues
 
 project_type_tags:
-- ios
-- react-native
 - cordova
-- ionic
 - flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- macos
+- react-native
 
 type_tags:
 - utility
